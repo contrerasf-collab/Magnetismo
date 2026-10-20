@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="es"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Cuaderno de magnetismo · Electromecánica</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&display=swap">
+<style>
+:root{--paper:#fbf8ef;--grid:#cfe0ee;--ink:#1f2a37;--r:#d94b3d;--b:#2f6fd0;--y:#ffe27a;--g:#3a9d5d;--card:#fffdf6;--mut:#5b6673;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]){--paper:#1c2230;--grid:#2b3547;--ink:#eef1f6;--r:#ff7a6b;--b:#6ea4ff;--y:#7a6720;--g:#5cc98a;--card:#232b3b;--mut:#aab4c3}}
+:root[data-theme="dark"]{--paper:#1c2230;--grid:#2b3547;--ink:#eef1f6;--r:#ff7a6b;--b:#6ea4ff;--y:#7a6720;--g:#5cc98a;--card:#232b3b;--mut:#aab4c3}
+html{scroll-padding-top:56px;scroll-behavior:smooth}
+*{box-sizing:border-box}
+body{margin:0;background:var(--paper);color:var(--ink);font:18px/1.35 "Segoe UI",system-ui,sans-serif;
+background-image:linear-gradient(var(--grid) 1px,transparent 1px),linear-gradient(90deg,var(--grid) 1px,transparent 1px);background-size:28px 28px}
+nav{position:sticky;top:0;z-index:5;display:flex;gap:6px;justify-content:center;padding:8px;background:var(--paper);border-bottom:2px solid var(--ink)}
+nav a{width:32px;height:32px;display:grid;place-items:center;border:2px solid var(--ink);border-radius:50%;color:var(--ink);text-decoration:none;font:700 18px Caveat,cursive}
+.page{max-width:980px;margin:18px auto;padding:22px 26px;background:color-mix(in srgb,var(--paper) 80%,transparent);border:2px solid var(--ink);border-radius:6px 14px 8px 12px;position:relative;break-after:page}
+.n{position:absolute;top:-14px;left:18px;background:var(--y);padding:0 12px;border:2px solid var(--ink);font:700 22px Caveat,cursive;transform:rotate(-3deg)}
+h1{font:700 clamp(30px,5vw,46px) Caveat,cursive;margin:6px 0 4px}
+h1:after{content:"";display:block;height:6px;width:60%;background:var(--y);margin-top:-8px;z-index:-1;position:relative;border-radius:3px}
+.key{background:var(--y);color:var(--ink);padding:6px 12px;border:2px solid var(--ink);border-radius:10px;font-weight:600;display:inline-block;margin:6px 0;transform:rotate(-.5deg)}
+:root[data-theme="dark"] .key,.key{color:var(--ink)}
+.row{display:grid;grid-template-columns:1.3fr 1fr;gap:16px;align-items:start}
+@media(max-width:760px){.row{grid-template-columns:1fr}.page{padding:18px 14px}}
+svg{width:100%;height:auto;display:block}
+svg text{font:700 15px Caveat,cursive;fill:var(--ink)}svg .t2{font-size:19px}
+.s{stroke:var(--ink);stroke-width:2.5;fill:none;stroke-linecap:round;stroke-linejoin:round}
+.rd{fill:var(--r)}.bl{fill:var(--b)}.gr{fill:#9aa3ad;stroke:var(--ink);stroke-width:2.5}.cu{fill:#c9773c;stroke:var(--ink);stroke-width:2.5}
+svg .w{fill:#fff}
+.box{background:var(--card);border:2px solid var(--ink);border-radius:10px;padding:8px 12px;margin:8px 0;font-size:16px}
+.box b{font-family:Caveat,cursive;font-size:21px}
+.real{border-left:6px solid var(--g)}.auto{border-left:6px solid var(--b)}.cur{border-left:6px solid var(--r);border-style:dashed dashed dashed solid}
+.q{background:var(--card);border:3px dashed var(--r);border-radius:12px;padding:10px 14px;font:700 24px Caveat,cursive;margin-top:10px}
+button{font:700 19px Caveat,cursive;background:var(--card);color:var(--ink);border:2px solid var(--ink);border-radius:8px;padding:4px 14px;cursor:pointer;box-shadow:3px 3px 0 var(--ink)}
+button:active{transform:translate(2px,2px);box-shadow:1px 1px 0 var(--ink)}
+.chips{display:flex;flex-wrap:wrap;gap:6px}.chips span{border:2px solid var(--ink);border-radius:20px;padding:1px 10px;background:var(--card);font-size:15px}
+.ok{background:#bfe8cb!important;color:#14301f}.no{background:#f4c4be!important;color:#3a1410}
+.hid{display:none}
+ol.leg{margin:0;padding-left:0;list-style:none;font-size:15px}ol.leg li{margin:3px 0}ol.leg b{display:inline-grid;place-items:center;width:22px;height:22px;border-radius:50%;background:var(--r);color:#fff;margin-right:6px;font-size:14px}
+input[type=range]{width:100%;accent-color:var(--b)}
+.dm{transition:transform .8s;transform-box:fill-box;transform-origin:center}
+#sv3:not(.rep) .rp,#sv3.rep .at{display:none}
+#fl{opacity:0;transition:opacity .6s}#fl.on{opacity:1}
+#ndl{transition:transform 1s;transform-origin:150px 60px}#ndl.on{transform:rotate(55deg)}
+#cur{display:none}#cur.on{display:block}
+@media print{:root:root:root{--paper:#fff;--grid:#dbe6ef;--ink:#111;--r:#d94b3d;--b:#2f6fd0;--y:#ffe27a;--g:#3a9d5d;--card:#fff;--mut:#444}
+nav,button,input{display:none!important}.page{margin:0;border-radius:0;max-height:none;page-break-after:always}body{font-size:14px;-webkit-print-color-adjust:exact;print-color-adjust:exact}#fl{opacity:1}}
+.st{background:var(--card);border:2px solid var(--ink);border-radius:10px;padding:8px 12px;margin:10px 0}.st>b:first-child{display:block;font:700 22px Caveat,cursive;color:var(--b)}
+.rev{display:none}.rev.on{display:block;animation:fi .6s}@keyframes fi{from{opacity:0;transform:translateY(8px)}}
+.pred{display:flex;flex-wrap:wrap;gap:8px;margin-top:6px}.pred .sel,.cd.sel{background:var(--y);outline:3px solid var(--ink)}
+.done .pred [data-ok]{background:#bfe8cb;color:#14301f}.done .pred .sel:not([data-ok]){background:#f4c4be;color:#3a1410}
+.cards{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;padding-top:34px}@media(max-width:600px){.cards{grid-template-columns:repeat(2,1fr)}}
+.cd{font-size:18px;padding:10px 4px;transition:transform .8s;line-height:1.2}.cd.att{transform:translateY(-30px)}.cd .tg{display:block;font:700 15px "Segoe UI",sans-serif;min-height:20px}
+table{border-collapse:collapse;width:100%;font-size:17px}td,th{border:2px solid var(--ink);padding:6px;text-align:center}td:first-child{text-align:left;font-weight:600}td.g{background:#bfe8cb;color:#14301f}td.x{background:#f4c4be;color:#3a1410}
+.chain{display:flex;flex-wrap:wrap;gap:6px;align-items:center;font-weight:600}.chain div{border:2px solid var(--ink);border-radius:10px;padding:6px 10px;background:var(--card);transition:.4s}.chain div.lit{background:var(--y);transform:scale(1.07)}
+.f{transition:transform 1.4s,opacity .8s;opacity:0}fieldset{border:2px solid var(--ink)}fieldset:disabled{opacity:.45}
+@media print{.rev{display:block!important}input[type=checkbox]{display:inline!important}}
+.cd small{font:400 14px "Segoe UI",sans-serif}select{font:inherit;padding:4px;background:var(--card);color:var(--ink);border:2px solid var(--ink);border-radius:6px}#log{margin:4px 0}
+.ov{opacity:0;transition:opacity .8s}.ov.on,.go .ov{opacity:1}.la,.lb{transition:transform .8s}.go .la{transform:translateX(-14px)}.go .lb{transform:translateX(14px)}
+.d2 .pred [data-k]{background:#bfe8cb;color:#14301f}.d2 .pred .sel:not([data-k]){background:#f4c4be;color:#3a1410}
+</style></head><body>
+<nav><a href="#p1">1</a><a href="#p2">2</a><a href="#p3">3</a><a href="#pp">4</a><a href="#p4">5</a><a href="#p5">6</a><a href="#pc">7</a><a href="#p6">8</a><a href="#p7">9</a><a href="#p8">10</a><a href="#p9">11</a></nav>
+<svg width="0" height="0" style="position:absolute"><defs>
+<symbol id="m" viewBox="0 0 120 40"><rect class="rd" width="60" height="40"/><rect class="bl" x="60" width="60" height="40"/><rect class="s" width="120" height="40"/><text x="24" y="28" class="t2" style="fill:#fff">N</text><text x="85" y="28" class="t2" style="fill:#fff">S</text></symbol>
+<symbol id="mi" viewBox="0 0 120 40"><rect class="bl" width="60" height="40"/><rect class="rd" x="60" width="60" height="40"/><rect class="s" width="120" height="40"/><text x="24" y="28" class="t2" style="fill:#fff">S</text><text x="85" y="28" class="t2" style="fill:#fff">N</text></symbol>
+<marker id="ah" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0 10 5 0 10z" fill="currentColor"/></marker></defs></svg>
+
+<!-- 1 -->
+<section class="page" id="p1"><span class="n">Página 1</span>
+<h1>¿Qué materiales se pegan a un imán?</h1>
+<div class="st"><b>1 · Predicción</b>Toca las piezas que CREES que se pegarán.</div>
+<div class="cards" id="c1"><button class="cd" data-m="1">🔩<br>Tornillo de acero<span class="tg"></span></button><button class="cd" data-m="0">🪢<br>Cable de cobre<span class="tg"></span></button><button class="cd" data-m="0">🥫<br>Pieza de aluminio<span class="tg"></span></button><button class="cd" data-m="0">🧴<br>Pieza de plástico<span class="tg"></span></button></div>
+<div style="text-align:center;margin:8px"><button id="k1" style="font-size:24px">🧲 COMPROBAR</button> <span id="sc1"></span></div>
+<div class="rev st" id="r1"><b>2 · Explicación</b>Solo se pega el acero: lleva hierro. Cobre, aluminio y plástico no. <div class="q" style="font-size:22px">¿Qué componentes del coche podrían ser de cada material? <button id="b1">Ver ideas</button></div>
+<div class="rev" id="r1b"><div class="box auto">🚗 <b>Acero:</b> chasis, tornillos, disco de freno · <b>Cobre:</b> cableado, bobinas · <b>Aluminio:</b> culata, llantas · <b>Plástico:</b> carcasas, conectores.</div></div></div></section>
+
+<!-- 2 -->
+<section class="page" id="p2"><span class="n">Página 2</span>
+<h1>¿Cómo se convierte el hierro en imán?</h1>
+<div class="st"><b>1 · Predicción</b>Al magnetizar un trozo de hierro, dentro…<div class="pred"><button>Aparecen imanes nuevos</button><button data-ok>Los mini-imanes se ordenan</button><button>No cambia nada</button></div></div>
+<div class="row"><div><svg id="dom" viewBox="0 0 300 170"><rect class="s" x="8" y="8" width="284" height="130" rx="8"/><text id="dl" x="10" y="162" class="t2">Dominios desordenados</text></svg></div>
+<div style="text-align:center"><button id="bd" data-show="r2" style="font-size:26px">🧲 MAGNETIZAR</button></div></div>
+<div class="rev st" id="r2"><b>2 · Explicación</b>🧭 Los dominios son como <b>miles de pequeñas brújulas</b>: desordenadas no hacen nada; alineadas suman fuerza y forman un imán.
+<div class="box auto">🚗 Rotor del alternador, imanes del arranque y rueda fónica del ABS.</div></div></section>
+
+<!-- 3 -->
+<section class="page" id="p3"><span class="n">Página 3</span>
+<h1>Taller: elige el material</h1>
+<div class="st"><b>1 · Decisión técnica</b>Elige el material más adecuado para cada componente del coche.</div>
+<table id="t3"><tr><th>Componente</th><th>Material</th></tr>
+<tr data-a="cobre"><td>🔌 Cableado</td><td><select><option value="">—</option><option value="hierro">Hierro</option><option value="acero">Acero</option><option value="cobre">Cobre</option><option value="aluminio">Aluminio</option></select></td></tr>
+<tr data-a="acero,hierro"><td>🛑 Disco de freno</td><td><select><option value="">—</option><option value="hierro">Hierro</option><option value="acero">Acero</option><option value="cobre">Cobre</option><option value="aluminio">Aluminio</option></select></td></tr>
+<tr data-a="aluminio"><td>⚙️ Culata</td><td><select><option value="">—</option><option value="hierro">Hierro</option><option value="acero">Acero</option><option value="cobre">Cobre</option><option value="aluminio">Aluminio</option></select></td></tr>
+<tr data-a="hierro"><td>🧲 Núcleo de relé</td><td><select><option value="">—</option><option value="hierro">Hierro</option><option value="acero">Acero</option><option value="cobre">Cobre</option><option value="aluminio">Aluminio</option></select></td></tr></table>
+<div style="text-align:center;margin:8px"><button id="k3" data-show="r3">✔ CORREGIR</button></div>
+<div class="rev st" id="r3"><b>2 · ¿Por qué?</b>🔌 Cable: <b>cobre</b>, conduce muy bien y no es magnético. 🛑 Disco: <b>acero o hierro</b>, aguanta desgaste y calor. ⚙️ Culata: <b>aluminio</b>, ligero y reparte el calor. 🧲 Núcleo de relé: <b>hierro</b>, concentra el campo.
+<div class="box auto">💡 Un buen conductor no tiene por qué ser magnético. Y un material magnético no es el mejor conductor: ¡el hierro conduce peor que el cobre!</div></div></section>
+
+<!-- 4 -->
+<section class="page" id="pp"><span class="n">Página 4</span>
+<h1>¿Por qué los electroimanes usan hierro?</h1>
+<div class="st"><b>1 · Predicción</b>Misma bobina, misma pila, tres núcleos. ¿Cuál hará el electroimán más potente?<div class="pred"><button data-ok>Hierro</button><button>Cobre</button><button>Aluminio</button></div></div>
+<div style="text-align:center;margin:8px"><button id="kp" data-show="rp" style="font-size:24px">🧪 PROBAR LOS 3 NÚCLEOS</button></div>
+<div id="nuc" style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px"></div>
+<div class="rev st" id="rp"><b>2 · Explicación</b>Algunos materiales <b>concentran el campo magnético</b> mucho mejor que otros. Con cobre o aluminio es casi como no tener núcleo.
+<div class="box auto">🚗 Relés, motores eléctricos y alternadores: hierro dentro de las bobinas.</div></div></section>
+
+<!-- 4 -->
+<section class="page" id="p4"><span class="n">Página 5</span>
+<h1>¿Por qué la brújula siempre apunta al mismo lugar?</h1>
+<div class="st"><b>1 · Predicción</b>Si giro la brújula, la aguja…<div class="pred"><button>Gira conmigo</button><button data-ok>Sigue apuntando al mismo sitio</button><button>Apunta donde quiere</button></div></div>
+<div class="row"><svg viewBox="0 0 240 245" color="#1f2a37"><text x="60" y="14" class="t2">⬆ Norte terrestre</text><g id="dial"><circle cx="120" cy="127" r="100" class="s" fill="var(--card)"/><text x="113" y="58" class="t2">N</text><text x="195" y="133" class="t2">E</text><text x="114" y="206" class="t2">S</text><text x="38" y="133" class="t2">O</text></g><path class="rd s" d="M110 127l10-80 10 80z"/><path class="bl s" d="M110 127l10 80 10-80z"/><circle cx="120" cy="127" r="5" fill="#111"/></svg>
+<div class="st"><b>2 · Comprobación</b>🔄 Gira la caja:<input id="rot" type="range" min="0" max="360" value="0"></div></div>
+<div class="rev st" id="r4"><b>3 · Explicación</b>La Tierra es un imán gigante. La aguja es un imán pequeño y su polo norte es atraído hacia el norte terrestre: <b>polos distintos se atraen, iguales se repelen</b>.
+<div class="box auto">🚗 El navegador usa un sensor magnético como una brújula digital.</div></div></section>
+
+<!-- 5 -->
+<section class="page" id="p5"><span class="n">Página 6</span>
+<h1>¿Existía el campo magnético antes de las limaduras?</h1>
+<div class="st"><b>1 · Predicción</b><div class="pred"><button data-ok>Sí, ya existía</button><button>No, lo crean las limaduras</button></div></div>
+<div class="row"><svg id="fs" viewBox="-40 -30 480 320" color="#1f2a37"><g id="ln" class="ov"></g><g id="fg"></g><use href="#m" x="150" y="113" width="100" height="33"/><g id="ln2" class="ov"><path class="s" d="M232 121H168" style="color:#fff;stroke:#fff;stroke-width:2" marker-end="url(#ah)"/><path class="s" d="M232 139H168" style="color:#fff;stroke:#fff;stroke-width:2" marker-end="url(#ah)"/></g></svg>
+<div style="text-align:center"><button id="k5" data-show="r5" style="font-size:24px">🌫️ ESPOLVOREAR LIMADURAS</button></div></div>
+<div class="rev st" id="r5"><b>2 · Explicación</b>Las limaduras no crean el campo: lo <b>hacen visible</b>. Cada una se orienta con las líneas de fuerza.
+<div class="box auto">🚗 El sensor de cigüeñal detecta cómo cambia el campo al pasar los dientes de la rueda fónica.</div></div>
+<div class="st" id="i5"><b>3 · ¿Dónde es más intenso el campo?</b><div class="pred"><button>En el centro del imán</button><button data-k>Cerca de los polos</button><button>Es igual en todas partes</button></div>
+<div style="text-align:center;margin:6px"><button id="ki">📏 MOSTRAR LÍNEAS DE FUERZA</button></div>
+<div class="rev" id="ri">Salen del <b>Norte</b>, entran por el <b>Sur</b> y se cierran por dentro del imán. Donde las líneas están <b>más juntas</b> (cerca de los polos) el campo es <b>más intenso</b>.</div></div></section>
+
+<!-- 6 -->
+<section class="page" id="pc"><span class="n">Página 7</span>
+<h1>¿Qué ocurre cuando unimos dos imanes?</h1>
+<div class="st" id="sit1"><b>Situación 1 · En línea (N-S + N-S)</b>¿Cómo se comportarán unidos?<div class="pred"><button>Dos imanes separados</button><button data-ok>Un imán más largo</button><button>Se anulan</button></div>
+<svg viewBox="0 0 300 70" color="#1f2a37"><use href="#m" x="20" y="15" width="120" height="40"/><use href="#m" x="140" y="15" width="120" height="40"/><g class="ov"><rect class="rd" x="20" y="15" width="120" height="40"/><rect class="bl" x="140" y="15" width="120" height="40"/><rect class="s" x="20" y="15" width="240" height="40"/><path d="M60 35H220" style="stroke:#fff;stroke-width:2;stroke-dasharray:6 5"/><text x="30" y="42" class="t2" style="fill:#fff">N</text><text x="240" y="42" class="t2" style="fill:#fff">S</text></g></svg>
+<button class="kk">🧲 UNIR</button><div class="rev">Se comportan como <b>un imán más largo</b>: los polos del centro casi desaparecen y solo quedan N y S en los extremos.</div></div>
+<div class="st" id="sit2"><b>Situación 2 · Apilados</b>N-S sobre N-S: ¿qué obtendré?<div class="pred"><button>Uno más débil</button><button data-ok>Un imán más potente</button><button>Se anulan</button></div>
+<svg viewBox="0 0 300 100" color="#1f2a37"><use href="#m" x="90" y="8" width="120" height="40"/><use href="#m" x="90" y="52" width="120" height="40"/><g class="ov"><rect class="rd" x="90" y="8" width="60" height="84"/><rect class="bl" x="150" y="8" width="60" height="84"/><rect class="s" x="90" y="8" width="120" height="84"/><text x="108" y="61" class="t2" style="fill:#fff;font-size:30px">N</text><text x="168" y="61" class="t2" style="fill:#fff;font-size:30px">S</text></g></svg>
+<button class="kk">🧲 APILAR</button><div class="rev">¡Más potente! ¿Dónde quedan N y S? <b>En los mismos lados</b>: N a la izquierda y S a la derecha, pero con más imán y más campo.</div></div>
+<div class="st" id="sit3"><b>Situación 3 · Polo igual con polo igual (N-N)</b>Intento juntarlos: ¿qué pasará?<div class="pred"><button>Se pegan</button><button data-ok>Se repelen</button><button>No pasa nada</button></div>
+<svg viewBox="0 0 300 70" color="#1f2a37"><g class="la"><use href="#mi" x="20" y="15" width="120" height="40"/></g><g class="lb"><use href="#m" x="160" y="15" width="120" height="40"/></g><g class="ov"><text x="95" y="11" class="t2">¡SE REPELEN!</text></g></svg>
+<button class="kk">🧲 ACERCAR</button><div class="rev">Dos polos iguales se <b>oponen</b>: sus campos se empujan y los imanes se separan.</div></div>
+<div class="rev st" id="cc"><b>Conclusión</b>Los campos magnéticos pueden <b>sumarse</b> (en línea), <b>reforzarse</b> (apilados) u <b>oponerse</b> (N-N).
+<div class="box">📌 <b>En resumen:</b> cada imán es una fila de mini-imanes (dominios) apuntando igual. Si los unes en el mismo sentido, sus efectos se suman; si uno mira al revés, se oponen. En la unión en línea el S de uno y el N del otro se tocan y se atraen: por eso casi desaparecen en el centro y solo cuentan los extremos.</div>
+<div class="q" style="font-size:22px">¿Dónde crees que se utiliza esta idea? <button id="ka">Ver aplicaciones</button></div>
+<div class="rev" id="ca"><div class="box auto">🚗 <b>Alternadores y motores eléctricos:</b> polos N y S alternados que se atraen y se repelen. <b>Sensores:</b> un imán cuyo campo cambia al pasar un diente. <b>Electroimanes y relés:</b> el campo de cada espira se suma al de las demás.</div></div></div></section>
+
+<section class="page" id="p6"><span class="n">Página 8</span>
+<h1>De los electrones al campo magnético</h1>
+<div class="chain" id="ch"><div>🔬 Electrón</div>➜<div>🏃 Movimiento</div>➜<div>⚡ Corriente</div>➜<div>🧲 Campo magnético</div></div>
+<div class="st"><b>1 · Predicción</b>Una corriente son electrones en movimiento. Alrededor del cable aparece…<div class="pred"><button>Nada</button><button data-ok>Un campo magnético</button></div></div>
+<div class="row"><svg viewBox="0 0 300 130" color="#1f2a37"><path class="cu" d="M10 40h280v10H10z"/><g id="ndl"><path d="M150 60l-8 40h16z" class="rd s"/><path d="M150 60l-8-40h16z" class="bl s"/></g><circle cx="150" cy="60" r="4" fill="#111"/><path id="cur" class="s" d="M20 45h60" style="stroke:var(--y);stroke-width:6" marker-end="url(#ah)"/></svg>
+<div style="text-align:center"><button id="k6" data-show="r6" style="font-size:24px">⚡ PASAR CORRIENTE</button></div></div>
+<div class="rev st" id="r6"><b>2 · Explicación</b>Oersted (1820): <b>cargas en movimiento crean un campo magnético</b>. El magnetismo es consecuencia de la corriente.
+<div class="box auto">🚗 Relé, bobina de encendido y solenoide del arranque.</div></div></section>
+
+<!-- 7 -->
+<section class="page" id="p7"><span class="n">Página 9</span>
+<h1>Reto: ¡levanta el máximo de clips!</h1>
+<div class="st"><b>1 · Predicción</b>¿Qué crees que aumentará más la fuerza?<div class="pred" id="p7p"><button>Más espiras</button><button>Más corriente</button><button data-ok>Núcleo de hierro</button></div></div>
+<fieldset id="lab" disabled class="st" style="margin:8px 0"><b>2 · Experimenta</b>Espiras: <span id="vE">15</span><input id="E" type="range" min="1" max="30" value="15">Corriente (A): <span id="vI">2</span><input id="I" type="range" min="1" max="5" value="2"><label><input id="N" type="checkbox" checked style="display:inline"> Núcleo de hierro</label>
+<div id="fo" style="font-size:20px;font-weight:600"></div><div id="clips" style="font-size:24px;min-height:34px"></div><button id="rg">📝 REGISTRAR INTENTO</button><ol id="log" style="font-size:15px"></ol></fieldset>
+<div style="text-align:center"><button data-show="r7">📋 TERMINAR EL RETO</button></div>
+<div class="rev st" id="r7"><b>3 · Resultado</b><div id="best" style="font-size:20px;font-weight:600"></div><div class="q" style="font-size:22px">¿Qué combinación ha dado mejor resultado? ¿Por qué no basta con subir la corriente al máximo?</div><div class="box">Más espiras y más corriente aumentan la fuerza, pero el cable se calienta (⚠ límite). El núcleo de hierro es lo que más multiplica.</div>
+<div class="box auto">🚗 Inyector, electroválvulas y solenoide del arranque.</div></div></section>
+
+<!-- 7 -->
+<section class="page" id="p8"><span class="n">Página 10</span>
+<h1>¿Qué componentes utilizan magnetismo?</h1>
+<div class="st"><b>1 · Clasifica</b>Toca los componentes que CREES que usan magnetismo.</div>
+<div class="cards" id="c8" style="padding-top:6px"><button class="cd" data-m="1" data-t="Usa bobinas e imanes: es nuestro próximo misterio.">⚡<br>Alternador<span class="tg"></span></button><button class="cd" data-m="0" data-t="Guarda energía con reacciones químicas, sin imanes.">🔋<br>Batería<span class="tg"></span></button><button class="cd" data-m="1" data-t="Un electroimán cierra un interruptor con poca corriente.">🔌<br>Relé<span class="tg"></span></button><button class="cd" data-m="0" data-t="Se funde si pasa demasiada corriente; solo es un hilo.">🧵<br>Fusible<span class="tg"></span></button><button class="cd" data-m="1" data-t="Detecta el giro de la rueda con un imán y una bobina.">🛞<br>Sensor ABS<span class="tg"></span></button><button class="cd" data-m="1" data-t="Utiliza electroimanes para generar movimiento.">🚀<br>Motor de arranque<span class="tg"></span></button><button class="cd" data-m="1" data-t="Una bobina levanta la aguja y deja pasar el combustible.">💉<br>Inyector<span class="tg"></span></button><button class="cd" data-m="0" data-t="Solo conduce la corriente; no aprovecha el magnetismo.">🪢<br>Cable eléctrico<span class="tg"></span></button></div>
+<div style="text-align:center;margin:8px"><button id="k8" data-show="r8" style="font-size:24px">🔍 COMPROBAR</button></div>
+<div class="rev st" id="r8"><b>2 · Pista de técnico</b>Si dentro hay una <b>bobina</b> o un <b>imán</b>, hay magnetismo. Si solo hay hilo, química o metal que conduce, no.</div></section>
+
+<section class="page" id="p9"><span class="n">Página 11</span>
+<h1>La gran pregunta</h1>
+<div class="st"><b>Reto</b>¡Enciende la bombilla! Coloca el imán donde quieras.</div>
+<svg viewBox="0 0 520 190" color="#1f2a37"><g class="cu" style="fill:none;stroke-width:6"><path d="M60 100c20-50 20 50 40 0s20 50 40 0 20 50 40 0"/></g><path class="s" d="M60 100V170H470V118M180 100V145H440V108"/>
+<g id="mg" style="transition:transform 1.2s"><use href="#m" x="270" y="82" width="110" height="37"/></g>
+<circle cx="470" cy="90" r="28" class="s" fill="var(--card)"/><path class="s" d="M458 112h24M460 90l10-12 10 12"/><text x="425" y="40" class="t2">Bombilla apagada</text><text x="60" y="30" class="t2">Bobina</text></svg>
+<div class="pred" style="justify-content:center"><button data-x="0">Imán lejos</button><button data-x="-85">Imán pegado a la bobina</button><button data-x="-205">Imán dentro de la bobina</button></div>
+<div class="rev st" id="r9a" style="text-align:center;font-size:22px">💡 Sigue apagada…</div>
+<div class="rev st" id="r9" style="text-align:center"><b>Necesitamos descubrir algo más…</b><div class="q" style="font-size:30px;border-style:solid">Si la corriente eléctrica genera magnetismo…<br>¿puede el magnetismo generar electricidad?</div></div></section>
+
+<script>
+const $=id=>document.getElementById(id),S=(e,s)=>[...e.querySelectorAll(s)];
+function fin(p,...ids){p.classList.add('done');ids.forEach(i=>$(i).classList.add('on'))}
+document.querySelectorAll('.pred').forEach(g=>S(g,'button').forEach(b=>b.onclick=()=>{S(g,'button').forEach(x=>x.classList.remove('sel'));b.classList.add('sel');if(g.id=='p7p')$('lab').disabled=false}));
+document.querySelectorAll('[data-show]').forEach(b=>b.addEventListener('click',()=>fin(b.closest('.page'),...b.dataset.show.split(' '))));
+// p1
+S($('c1'),'.cd').forEach(c=>c.onclick=()=>c.classList.toggle('sel'));
+$('k1').onclick=()=>{let ok=0;S($('c1'),'.cd').forEach(c=>{const m=c.dataset.m=='1',p=c.classList.contains('sel');if(m==p)ok++;c.classList.toggle('att',m);c.querySelector('.tg').textContent=(m?'✔ se pega':'✘ no se pega')+(m==p?' · acertaste':' · fallaste')});$('sc1').textContent='Aciertos: '+ok+'/4';fin($('p1'),'r1')};
+$('b1').onclick=()=>$('r1b').classList.add('on');
+// p2
+const dom=$('dom');let al=false;
+for(let r=0;r<4;r++)for(let c=0;c<7;c++){const g=document.createElementNS('http://www.w3.org/2000/svg','g');g.setAttribute('transform',`translate(${35+c*38},${32+r*32})`);
+g.innerHTML=`<path class="s dm" style="stroke:var(--b);--d:${(r*97+c*53)%360}deg;transform:rotate(var(--d))" d="M-12 0h24m-7-5 7 5-7 5"/>`;dom.insertBefore(g,$('dl'))}
+$('bd').addEventListener('click',()=>{al=!al;S(dom,'.dm').forEach(p=>p.style.transform=al?'rotate(0deg)':'rotate(var(--d))');
+$('dl').textContent=al?'Dominios alineados → ¡imán!':'Dominios desordenados';$('bd').textContent=al?'🔀 DESMAGNETIZAR':'🧲 MAGNETIZAR'});
+// p3
+$('k3').addEventListener('click',()=>S($('t3'),'tr[data-a]').forEach(r=>{r.cells[1].className=r.dataset.a.split(',').includes(r.querySelector('select').value)?'g':'x'}));
+$('kp').addEventListener('click',()=>{$('nuc').innerHTML=[['Hierro',12],['Cobre',1],['Aluminio',1]].map(([n,c])=>`<div class="st" style="text-align:center"><b>${n}</b><div style="font-size:22px">${'📎'.repeat(c)}</div>${c} clips</div>`).join('')});
+// p4
+$('rot').oninput=e=>{$('dial').setAttribute('transform',`rotate(${e.target.value} 120 127)`);fin($('p4'),'r4')};
+// p5
+const R={},fs=$('fs'),NS='http://www.w3.org/2000/svg';
+const mk=(t,a)=>{const e=document.createElementNS(NS,t);for(const k in a)e.setAttribute(k,a[k]);return e};
+function Bf(x,y){let bx=0,by=0;[[160,1],[240,-1]].forEach(([px,q])=>{const dx=x-px,dy=y-130,d=Math.hypot(dx,dy)**3;bx+=q*dx/d;by+=q*dy/d});return[bx,by]}
+function tr(a){let x=160+7*Math.cos(a),y=130+7*Math.sin(a);const P=[[x,y]];for(let k=0;k<700;k++){const[bx,by]=Bf(x,y),m=Math.hypot(bx,by);x+=bx/m*3;y+=by/m*3;P.push([x,y]);if(x>=200)return P.concat(P.slice().reverse().map(q=>[400-q[0],q[1]]));if(x<-40||y<-30||y>290)return null}return null}
+const rnd=()=>`translate(${-40+Math.random()*480}px,${-30+Math.random()*320}px) rotate(${Math.random()*180}deg)`;
+[-1,1].forEach(sg=>{[.5,.8,1.1,1.5,1.9,2.3,2.6].forEach(f=>{const Q=tr(Math.PI-sg*f);if(!Q)return;const i=Math.floor(Q.length*.3);
+$('ln').appendChild(mk('path',{d:'M'+Q.map(p=>p[0].toFixed(1)+' '+p[1].toFixed(1)).join('L'),class:'s',style:'stroke:var(--b);stroke-width:1.8'}));
+const a=Math.atan2(Q[i+1][1]-Q[i][1],Q[i+1][0]-Q[i][0])*57.3;$('ln').appendChild(mk('path',{d:'M-6 -5L5 0L-6 5z',transform:`translate(${Q[i][0]},${Q[i][1]}) rotate(${a})`,style:'fill:var(--b)'}))});
+for(let f=.4;f<2.8;f+=.2){const Q=tr(Math.PI-sg*f);if(!Q)continue;for(let i=3;i<Q.length-1;i+=7){const[x,y]=Q[i];if(x>148&&x<252&&y>111&&y<148)continue;
+const e=mk('rect',{x:-5,y:-.9,width:10,height:1.8,class:'f'});e.style.fill='var(--ink)';e.style.transform=rnd();e.dataset.f=`translate(${x}px,${y}px) rotate(${Math.atan2(Q[i+1][1]-y,Q[i+1][0]-x)*57.3}deg)`;$('fg').appendChild(e)}}});
+$('k5').addEventListener('click',()=>S($('fg'),'.f').forEach(e=>{e.style.opacity=.9;e.style.transform=e.dataset.f}));
+$('ki').onclick=()=>{$('i5').classList.add('d2');$('ln').classList.add('on');$('ln2').classList.add('on');$('ri').classList.add('on')};
+R.p5=()=>S($('fg'),'.f').forEach(e=>{e.style.opacity=0;e.style.transform=rnd()});
+// p6
+$('k6').addEventListener('click',()=>{$('ndl').classList.add('on');$('cur').classList.add('on');S($('ch'),'div').forEach((d,i)=>setTimeout(()=>d.classList.add('lit'),i*600))});
+// p7
+let cur={},best=null;
+function u(){const e=+$('E').value,i=+$('I').value,n=$('N').checked,h=e*i*i>300,f=h?0:Math.round(e*i*(n?1:.06)),c=Math.min(15,Math.floor(f/8));cur={e,i,n,c,h};
+$('vE').textContent=e;$('vI').textContent=i;$('fo').textContent=h?'🔥 ¡El cable se sobrecalienta!':'Fuerza: '+f;$('clips').textContent=h?'—':c?'📎'.repeat(c):'— (no levanta nada)'}
+['E','I','N'].forEach(k=>$(k).oninput=u);u();
+$('best').textContent='Registra al menos un intento para ver tu mejor diseño.';
+$('rg').onclick=()=>{const l=document.createElement('li');l.textContent=`${cur.e} espiras, ${cur.i} A, ${cur.n?'con':'sin'} núcleo → ${cur.h?'sobrecalentado':cur.c+' clips'}`;$('log').appendChild(l);if(!best||cur.c>best.c)best={...cur};$('best').textContent=`🏆 Tu mejor diseño: ${best.e} espiras, ${best.i} A, ${best.n?'con':'sin'} núcleo → ${best.c} clips`};
+// p8
+S($('c8'),'.cd').forEach(c=>c.onclick=()=>c.classList.toggle('sel'));
+$('k8').addEventListener('click',()=>S($('c8'),'.cd').forEach(c=>{const m=c.dataset.m=='1',p=c.classList.contains('sel');c.classList.toggle('att',m);c.querySelector('.tg').innerHTML=(m?'✔ usa magnetismo':'✘ no usa')+(m==p?' · acertaste':' · fallaste')+'<br><small>'+c.dataset.t+'</small>'}));
+// p9
+let t9=0;S($('p9'),'.pred button').forEach(b=>b.addEventListener('click',()=>{$('mg').style.transform=`translate(${b.dataset.x}px,0)`;$('r9a').classList.add('on');if(++t9>=2)setTimeout(()=>$('r9').classList.add('on'),900)}));
+// p7c
+let nc=0;
+S($('pc'),'.kk').forEach(b=>b.onclick=()=>{const st=b.closest('.st');if(!st.classList.contains('go'))nc++;st.classList.add('go','done');S(st,'.rev').forEach(e=>e.classList.add('on'));if(nc>=3)$('cc').classList.add('on')});
+$('ka').onclick=()=>$('ca').classList.add('on');
+R.pc=()=>{nc=0};
+R.p1=()=>{$('sc1').textContent=''};
+R.p2=()=>{al=false;S(dom,'.dm').forEach(p=>p.style.transform='rotate(var(--d))');$('dl').textContent='Dominios desordenados';$('bd').textContent='🧲 MAGNETIZAR'};
+R.pp=()=>{$('nuc').innerHTML=''};
+R.p4=()=>{$('rot').value=0;$('dial').setAttribute('transform','rotate(0 120 127)')};
+R.p6=()=>{$('ndl').classList.remove('on');$('cur').classList.remove('on')};
+R.p7=()=>{$('lab').disabled=true;$('E').value=15;$('I').value=2;$('N').checked=true;u();$('log').innerHTML='';best=null;$('best').textContent='Registra al menos un intento para ver tu mejor diseño.'};
+R.p9=()=>{$('mg').style.transform='';t9=0};
+function rst(p){p.classList.remove('done');S(p,'.done,.d2,.go').forEach(e=>e.classList.remove('done','d2','go'));S(p,'.rev,.ov').forEach(e=>e.classList.remove('on'));S(p,'.sel,.att').forEach(e=>e.classList.remove('sel','att'));S(p,'.tg').forEach(e=>e.textContent='');S(p,'td.g,td.x').forEach(e=>e.className='');S(p,'select').forEach(e=>e.value='');S(p,'.lit').forEach(e=>e.classList.remove('lit'));if(R[p.id])R[p.id]()}
+const L={p3:'🧹 Borrar respuestas',p7:'🔄 Volver a intentarlo',p8:'🔄 Volver a intentarlo'};
+document.querySelectorAll('.page').forEach(p=>{const d=document.createElement('div');d.style.cssText='text-align:center;margin:8px';d.innerHTML='<button class="rs">'+(L[p.id]||'🔄 Reiniciar actividad')+'</button>';p.appendChild(d);d.firstChild.onclick=()=>rst(p)});
+</script></body></html>
