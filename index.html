@@ -172,13 +172,15 @@ table{border-collapse:collapse;width:100%;font-size:17px}td,th{border:2px solid 
 
 <section class="page" id="p9"><span class="n">Página 11</span>
 <h1>La gran pregunta</h1>
-<div class="st"><b>Reto</b>¡Enciende la bombilla! Coloca el imán donde quieras.</div>
+<div class="st"><b>Reto</b>¡Enciende la bombilla! Prueba las situaciones y observa con atención.</div>
 <svg viewBox="0 0 520 190" color="#1f2a37"><g class="cu" style="fill:none;stroke-width:6"><path d="M60 100c20-50 20 50 40 0s20 50 40 0 20 50 40 0"/></g><path class="s" d="M60 100V170H470V118M180 100V145H440V108"/>
-<g id="mg" style="transition:transform 1.2s"><use href="#m" x="270" y="82" width="110" height="37"/></g>
-<circle cx="470" cy="90" r="28" class="s" fill="var(--card)"/><path class="s" d="M458 112h24M460 90l10-12 10 12"/><text x="425" y="40" class="t2">Bombilla apagada</text><text x="60" y="30" class="t2">Bobina</text></svg>
-<div class="pred" style="justify-content:center"><button data-x="0">Imán lejos</button><button data-x="-85">Imán pegado a la bobina</button><button data-x="-205">Imán dentro de la bobina</button></div>
-<div class="rev st" id="r9a" style="text-align:center;font-size:22px">💡 Sigue apagada…</div>
-<div class="rev st" id="r9" style="text-align:center"><b>Necesitamos descubrir algo más…</b><div class="q" style="font-size:30px;border-style:solid">Si la corriente eléctrica genera magnetismo…<br>¿puede el magnetismo generar electricidad?</div></div></section>
+<g id="mg"><use href="#m" x="270" y="82" width="110" height="37"/></g>
+<circle id="hl" cx="470" cy="90" r="42" fill="#ffd84a" opacity="0"/><circle cx="470" cy="90" r="28" class="s" fill="var(--card)"/><circle id="gl" cx="470" cy="90" r="27" fill="#ffd84a" opacity="0"/><path class="s" d="M458 112h24M460 90l10-12 10 12"/><text id="bt" x="400" y="28" class="t2">Bombilla apagada</text><text x="60" y="30" class="t2">Bobina</text></svg>
+<div id="o9" style="display:flex;flex-wrap:wrap;gap:8px;justify-content:center"><button data-a="a">A · Meter el imán</button><button data-a="b">B · Imán quieto dentro</button><button data-a="c">C · Sacar el imán</button><button data-a="d">D · Muy lento</button><button data-a="e">E · Muy rápido</button></div>
+<div class="st" id="n9" style="text-align:center;font-size:20px">Imán lejos · bombilla apagada.</div>
+<div class="rev st" id="d9"><b>¿En qué situaciones se ha iluminado la bombilla?</b><div class="pred"><button>Cuando el imán estaba quieto</button><button data-ok>Cuando el imán se movía</button><button>Siempre que estuviera cerca</button></div><div style="text-align:center;margin-top:8px"><button id="c9">✔ COMPROBAR</button></div></div>
+<div class="rev st" id="r9"><b>Lo que has descubierto</b><div style="font-size:22px">El magnetismo puede generar electricidad, pero <b>solo cuando el campo magnético cambia</b> respecto a la bobina.</div>La corriente aparece cuando cambia el flujo magnético que atraviesa la bobina. Imán quieto: nada. Imán en movimiento: corriente. Más rápido: más intensidad.</div>
+<div class="rev st" id="r9b" style="text-align:center"><b>Y ahora…</b><div class="q" style="font-size:26px;border-style:solid">Si mover un imán dentro de una bobina genera electricidad…<br>¿cómo podríamos hacerlo miles de veces por minuto dentro de un vehículo?</div><div class="chips" style="justify-content:center"><span>⚡ Inducción electromagnética</span><span>🚗 El alternador</span></div></div></section>
 
 <script>
 const $=id=>document.getElementById(id),S=(e,s)=>[...e.querySelectorAll(s)];
@@ -227,7 +229,18 @@ $('rg').onclick=()=>{const l=document.createElement('li');l.textContent=`${cur.e
 S($('c8'),'.cd').forEach(c=>c.onclick=()=>c.classList.toggle('sel'));
 $('k8').addEventListener('click',()=>S($('c8'),'.cd').forEach(c=>{const m=c.dataset.m=='1',p=c.classList.contains('sel');c.classList.toggle('att',m);c.querySelector('.tg').innerHTML=(m?'✔ usa magnetismo':'✘ no usa')+(m==p?' · acertaste':' · fallaste')+'<br><small>'+c.dataset.t+'</small>'}));
 // p9
-let t9=0;S($('p9'),'.pred button').forEach(b=>b.addEventListener('click',()=>{$('mg').style.transform=`translate(${b.dataset.x}px,0)`;$('r9a').classList.add('on');if(++t9>=2)setTimeout(()=>$('r9').classList.add('on'),900)}));
+let x9=0,busy=0,n9=0,tk=0;
+function glow(v){$('gl').style.opacity=v;$('hl').style.opacity=v*.5;$('bt').textContent=v>.03?'¡Se ilumina!':'Bombilla apagada'}
+function mv(t,d,m1,m2){const a=x9,t0=performance.now(),my=++tk;busy=1;$('n9').textContent=m1;
+(function f(now){if(my!=tk)return;const k=Math.min(1,(now-t0)/d);x9=a+(t-a)*k;glow(k<1?Math.min(1,Math.abs(t-a)/d*4.5):0);$('mg').setAttribute('transform',`translate(${x9} 0)`);if(k<1)requestAnimationFrame(f);else{busy=0;$('n9').textContent=m2}})(t0)}
+S($('o9'),'button').forEach(b=>b.onclick=()=>{if(busy)return;const k=b.dataset.a,dentro=x9<-200;
+if(k=='a'||k=='c'){if((k=='a')==dentro){$('n9').textContent=dentro?'El imán ya está dentro. Prueba otra opción.':'El imán ya está fuera. Prueba otra opción.';return}
+mv(k=='a'?-205:0,1500,k=='a'?'El imán entra en la bobina…':'El imán sale de la bobina…','El imán se ha parado: bombilla apagada.')}
+else if(k=='b'){if(!dentro){$('n9').textContent='Primero mete el imán (opción A) y luego déjalo quieto.';return}$('n9').textContent='Imán quieto dentro de la bobina: bombilla apagada. ¿Por qué no permanece encendida?'}
+else mv(dentro?0:-205,k=='d'?9000:400,k=='d'?'Lo muevo muy despacio…':'Lo muevo rapidísimo…','El imán se ha parado: bombilla apagada.');
+if(++n9>=3)$('d9').classList.add('on')});
+$('c9').onclick=()=>{$('d9').classList.add('done');$('r9').classList.add('on');setTimeout(()=>$('r9b').classList.add('on'),1200)};
+R.p9=()=>{tk++;x9=0;busy=0;n9=0;$('mg').setAttribute('transform','translate(0 0)');glow(0);$('n9').textContent='Imán lejos · bombilla apagada.'};
 // p7c
 let nc=0;
 S($('pc'),'.kk').forEach(b=>b.onclick=()=>{const st=b.closest('.st');if(!st.classList.contains('go'))nc++;st.classList.add('go','done');S(st,'.rev').forEach(e=>e.classList.add('on'));if(nc>=3)$('cc').classList.add('on')});
@@ -239,7 +252,6 @@ R.pp=()=>{$('nuc').innerHTML=''};
 R.p4=()=>{$('rot').value=0;$('dial').setAttribute('transform','rotate(0 120 127)')};
 R.p6=()=>{$('ndl').classList.remove('on');$('cur').classList.remove('on')};
 R.p7=()=>{$('lab').disabled=true;$('E').value=15;$('I').value=2;$('N').checked=true;u();$('log').innerHTML='';best=null;$('best').textContent='Registra al menos un intento para ver tu mejor diseño.'};
-R.p9=()=>{$('mg').style.transform='';t9=0};
 function rst(p){p.classList.remove('done');S(p,'.done,.d2,.go').forEach(e=>e.classList.remove('done','d2','go'));S(p,'.rev,.ov').forEach(e=>e.classList.remove('on'));S(p,'.sel,.att').forEach(e=>e.classList.remove('sel','att'));S(p,'.tg').forEach(e=>e.textContent='');S(p,'td.g,td.x').forEach(e=>e.className='');S(p,'select').forEach(e=>e.value='');S(p,'.lit').forEach(e=>e.classList.remove('lit'));if(R[p.id])R[p.id]()}
 const L={p3:'🧹 Borrar respuestas',p7:'🔄 Volver a intentarlo',p8:'🔄 Volver a intentarlo'};
 document.querySelectorAll('.page').forEach(p=>{const d=document.createElement('div');d.style.cssText='text-align:center;margin:8px';d.innerHTML='<button class="rs">'+(L[p.id]||'🔄 Reiniciar actividad')+'</button>';p.appendChild(d);d.firstChild.onclick=()=>rst(p)});
